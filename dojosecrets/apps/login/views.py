@@ -7,6 +7,7 @@ from .models import User, Secret, Like
 from django.core.urlresolvers import reverse
 # Create your views here.
 def index(request):
+    request.session['status'] = False
     return render(request, 'login/index.html')
 
 def register(request):
@@ -25,6 +26,7 @@ def register(request):
 def login(request):
     print User.objects.all()
     results = User.objects.login(request.POST)
+    request.session['status'] = True
     if results['valid']: 
         request.session['name'] = User.objects.filter(email = request.POST['login_email'])[0].first
         request.session['id'] = User.objects.filter(email = request.POST['login_email'])[0].id

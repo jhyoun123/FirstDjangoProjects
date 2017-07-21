@@ -10,7 +10,11 @@ def index(request):
     context = {
         'secrets': Secret.objects.all().order_by('-date_added'),
     }
-    return render(request, 'secret/index.html', context)
+    if (request.session['status']):
+        return render(request, 'secret/index.html', context)
+    else:
+        messages.error(request, "Please log in first.")
+        return redirect('/')
 
 def post(request): 
     Secret.objects.create(content = request.POST['secret_content'], user = User.objects.get(id = request.session['id']))
