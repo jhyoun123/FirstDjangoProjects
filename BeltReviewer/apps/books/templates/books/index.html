@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books Home</title>
+</head>
+<body>
+    <p>Welcome, {{request.session.name}}</p>
+    <h3>Recent Book Reviews:</h3>
+    {% for review in reviews %}
+        <p>{{review.book.title}}</p>
+        <p>{{review.rating}}</p>
+        <p>{{review.user.first}} says: {{review.content}}</p>
+        <p>Posted on {{review.date_added}}</p>
+    {% endfor %}
+    <h3>Other Books with Reviews</h3>
+    <a href="/books/add_home">Add Book and Review</a>
+    <a href="/">Logout</a>
+</body>
+</html>

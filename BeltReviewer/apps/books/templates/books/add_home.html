@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Book and Review</title>
+</head>
+<body>
+    <a href="/books">Home</a>
+    <a href="/">Logout</a>
+    <h3>Add a New Book Titles and a Review:</h3>
+    {% if messages %}
+        {% for error in messages %}
+            <p>{{error}}</p>
+        {%  endfor %}
+    {% endif %}
+    <form action="/books/add" method="post">
+        {% csrf_token %}
+        Book Title: <input type="text" name="title">
+        <br>
+        Author:<br>
+        Choose from the list: 
+        <select name="author_list">
+            <option value="Stephen King">Stephen King</option>
+            <option value="Brian Greene">Brian Greene</option>
+            <option value="Ayn Rand">Ayn Rand</option>
+            <option value="Ernest Hemingway">Ernest Hemingway</option>
+        </select>
+        <br>
+        Or add a new author: <input type="text" name="new_author">
+        <br>
+        Review: <textarea name="review"></textarea>
+        <br>
+        Rating:
+        <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        <input type="submit" value="Add Book and Review">
+    </form>
+</body>
+</html>
